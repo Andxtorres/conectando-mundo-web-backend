@@ -3,8 +3,21 @@ from schema.userschema import User
 from repository import userrepository
 from database import SessionLocal, engine
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
 
 app=FastAPI()
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 def get_db():
     db = SessionLocal()
     try:
